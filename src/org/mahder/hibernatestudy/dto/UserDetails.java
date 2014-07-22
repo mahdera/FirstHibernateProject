@@ -3,20 +3,42 @@
  */
 package org.mahder.hibernatestudy.dto;
 
+import java.util.Date;
+
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  * @author alemayehu
  *
  */
 @Entity
+@Table(name="USER_DETAILS")
 public class UserDetails {
 	@Id
+	@Column(name="USER_ID")
 	private int userId;
-	
+		
+	@Column(name="USER_NAME")
 	private String userName;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="JOINED_DATE")	
+	private Date joinedDate;
+	
+	@Column(name="ADDRESS")
+	private String Address;
+	
+	@Lob
+	@Column(name="DESCRIPTION")
+	private String description;
 
 	public UserDetails() {
 
@@ -37,5 +59,31 @@ public class UserDetails {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
+	public Date getJoinedDate() {
+		return joinedDate;
+	}
+
+	public void setJoinedDate(Date joinedDate) {
+		this.joinedDate = joinedDate;
+	}
+
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setAddress(String address) {
+		Address = address;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 
 }// end class

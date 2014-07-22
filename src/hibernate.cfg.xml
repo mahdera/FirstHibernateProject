@@ -48,7 +48,7 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
 
-        <!-- Drop and re-create the database schema on startup -->
+        <!-- Drop and re-create the database schema on startup creates if table does not exist and keeps updating the records...-->
         <property name="hbm2ddl.auto">create</property>
         
         <!-- Names the annotated class -->

@@ -3,6 +3,8 @@
  */
 package org.mahder.hibernatestudy;
 
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -20,7 +22,10 @@ public class HibernateTest {
 	public static void main(String[] args) {
 		UserDetails user = new UserDetails();
 		user.setUserId(1);
-		user.setUserName("Mahder");
+		user.setUserName("Yefikir");
+		user.setAddress("7314 Powhatan st");
+		user.setJoinedDate(new Date());
+		user.setDescription("This is the description of the user object");
 		
 		//I need to save this object to the database...
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
