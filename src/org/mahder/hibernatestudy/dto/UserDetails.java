@@ -3,13 +3,22 @@
  */
 package org.mahder.hibernatestudy.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,25 +29,36 @@ import javax.persistence.Transient;
  *
  */
 @Entity
-@Table(name="USER_DETAILS")
+@Table(name = "USER_DETAILS")
 public class UserDetails {
 	@Id
-	@Column(name="USER_ID")
+	@GeneratedValue
+	@Column(name = "USER_ID")
 	private int userId;
-		
-	@Column(name="USER_NAME")
+
+	@Column(name = "USER_NAME")
 	private String userName;
-	
+
 	@Temporal(TemporalType.DATE)
-	@Column(name="JOINED_DATE")	
+	// to save only the date part and leave the time part out.
+	@Column(name = "JOINED_DATE")
 	private Date joinedDate;
-	
-	@Column(name="ADDRESS")
-	private String Address;
-	
+
+	@Embedded
+	private Address address;
+
 	@Lob
-	@Column(name="DESCRIPTION")
+	@Column(name = "DESCRIPTION")
 	private String description;
+
+	@OneToOne
+	@JoinColumn(name="VEHICLE_ID")
+	private Vehicle vehicle;
+	
+	@OneToMany
+	@JoinTable(name="USER_CELLPHONE", joinColumns=@JoinColumn(name="USER_ID"),
+			inverseJoinColumns=@JoinColumn(name="CELLPHONE_ID"))
+	private Collection<CellPhone> cellPhoneCollection = new ArrayList<CellPhone>();
 
 	public UserDetails() {
 
@@ -68,12 +88,12 @@ public class UserDetails {
 		this.joinedDate = joinedDate;
 	}
 
-	public String getAddress() {
-		return Address;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setAddress(String address) {
-		Address = address;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public String getDescription() {
@@ -82,6 +102,22 @@ public class UserDetails {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+
+	public Collection<CellPhone> getCellPhoneCollection() {
+		return cellPhoneCollection;
+	}
+
+	public void setCellPhoneCollection(Collection<CellPhone> cellPhoneCollection) {
+		this.cellPhoneCollection = cellPhoneCollection;
 	}
 	
 	

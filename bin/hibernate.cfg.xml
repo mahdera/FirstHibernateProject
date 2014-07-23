@@ -53,6 +53,8 @@
         
         <!-- Names the annotated class -->
         <mapping class="org.mahder.hibernatestudy.dto.UserDetails"/>
+        <mapping class="org.mahder.hibernatestudy.dto.Vehicle"/>
+        <mapping class="org.mahder.hibernatestudy.dto.CellPhone"/>
     </session-factory>
 
 </hibernate-configuration>
